@@ -51,9 +51,19 @@ module HTTPI
       @headers ||= Rack::Utils::HeaderHash.new
     end
 
+    # Shortcut for the +headers+ method.
+    def [](key)
+      headers[key]
+    end
+
     # Sets the Hash of HTTP headers.
     def headers=(headers)
       @headers = Rack::Utils::HeaderHash.new(headers)
+    end
+
+    # Shortcut for the <tt>headers=</tt> method.
+    def []=(key, value)
+      headers[key] = value
     end
 
     # Adds a header information to accept gzipped content.

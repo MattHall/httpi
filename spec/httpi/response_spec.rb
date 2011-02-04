@@ -4,7 +4,7 @@ require "httpi/response"
 describe HTTPI::Response do
 
   context "normal" do
-    let(:response) { HTTPI::Response.new 200, {}, Fixture.xml }
+    let(:response) { HTTPI::Response.new 200, { "Content-Encoding" => "gzip" }, Fixture.xml }
 
     describe "#error?" do
       it "should return false" do
@@ -14,10 +14,15 @@ describe HTTPI::Response do
 
     describe "#headers" do
       it "should return the HTTP response headers" do
-        response.headers.should == {}
+        response.headers.should == { "Content-Encoding" => "gzip" }
       end
     end
 
+    describe "#[]" do
+      it "should act as a shortcut for accessing the HTTP response headers" do
+        response["Content-Encoding"].should == "gzip"
+      end
+    end
     describe "#code" do
       it "should return the HTTP response code" do
         response.code.should == 200

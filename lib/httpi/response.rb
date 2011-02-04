@@ -22,6 +22,11 @@ module HTTPI
 
     attr_accessor :code, :headers, :raw_body, :attachments
 
+    # Shortcut for the +headers+ method.
+    def [](key)
+      headers[key]
+    end
+
     # Returns whether the HTTP response is considered successful.
     def error?
       !SuccessfulResponseCodes.include? code.to_i

@@ -73,13 +73,20 @@ describe HTTPI::Request do
   end
 
   describe "#headers" do
-    it "lets you specify a Hash of HTTP request headers" do
+    it "should let you specify a Hash of HTTP request headers" do
       request.headers = { "Accept-Encoding" => "gzip" }
       request.headers.should == { "Accept-Encoding" => "gzip" }
     end
 
-    it "defaults to return an empty Hash" do
+    it "should default to return an empty Hash" do
       request.headers.should == {}
+    end
+  end
+
+  describe "#[]" do
+    it "should act as a shortcut for accessing/specifying HTTP request headers" do
+      request["Accept-Encoding"] = "gzip"
+      request["Accept-Encoding"].should == "gzip"
     end
   end
 
